@@ -36,22 +36,28 @@ namespace LoginApp
 
         private void CreatePopup(string text) {
 
-            Popup codePopup = new Popup();
-            TextBlock popupText = new TextBlock();
-            popupText.Text = text;
-            popupText.Background = Brushes.White;
-            popupText.Height = ActualHeight;
-            popupText.Width = ActualWidth;
-            popupText.HorizontalAlignment = HorizontalAlignment.Center;
-            popupText.VerticalAlignment = VerticalAlignment.Center;
-            popupText.FontSize = 24;
-            codePopup.Child = popupText;
-            codePopup.PlacementTarget = this;
-            codePopup.Placement = PlacementMode.Center;
-            codePopup.IsOpen = true;
-            codePopup.Width = 300;
-            codePopup.Height = 180;
+            Popup popup = new Popup();
+            popup.PlacementTarget = this;
+            popup.Placement = PlacementMode.Center;
+            popup.AllowsTransparency = true;
+            popup.IsOpen = true;
 
+            TextBlock textBlock = new TextBlock();
+            textBlock.Text = text;
+            textBlock.Background = Brushes.White;
+            textBlock.Foreground = Brushes.Black;
+            textBlock.Padding = new Thickness(10);
+            textBlock.FontSize = 20;
+            textBlock.Width = 300;
+            textBlock.Height = 180;
+            textBlock.TextAlignment = TextAlignment.Center;
+            textBlock.VerticalAlignment = VerticalAlignment.Center;
+
+            Grid grid = new Grid();
+
+            grid.Children.Add(textBlock);
+
+            popup.Child = grid;
 
         }
     }
