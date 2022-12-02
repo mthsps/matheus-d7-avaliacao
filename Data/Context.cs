@@ -1,5 +1,6 @@
 ﻿using LoginApp.Model;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace LoginApp.Data
 {
@@ -11,5 +12,24 @@ namespace LoginApp.Data
         }
         public DbSet<User> Users { get; set; }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().HasData(GetUsers());
+            base.OnModelCreating(modelBuilder);
+        }
+
+        private static User[] GetUsers()
+        {
+            return new User[]
+            {
+                new User
+                {
+                    Id = Guid.NewGuid(),
+                    Username = "admin@email.com",
+                    Password = "admin123"
+                }
+            };
+        }
     }
+
 }

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using LoginApp.Data;
+using LoginApp.Model;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -21,44 +19,39 @@ namespace LoginApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+
+        private readonly Context context;
+        public MainWindow(Context context)
         {
+            this.context = context;
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Login(object sender, RoutedEventArgs e)
         {
+            var username = txtUsername.Text;
+            var password = txtPassword.Password;
 
-            string text = "Usuário autenticado!";
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            {
+                MessageBox.Show("Username or Password is empty");
+                return;
+            }
 
-            CreatePopup(text);
+            var user = context.Users.
+                Where(b => b.Username == username && b.Password == password)
+                .FirstOrDefault();
+
+
+
+            if (user == null)
+            {
+                MessageBox.Show("Usuário autenticado");
+                return;
+            }
+
+            MessageBox.Show("Credenciais inválidas");
         }
 
-        private void CreatePopup(string text) {
-
-            Popup popup = new Popup();
-            popup.PlacementTarget = this;
-            popup.Placement = PlacementMode.Center;
-            popup.AllowsTransparency = true;
-            popup.IsOpen = true;
-
-            TextBlock textBlock = new TextBlock();
-            textBlock.Text = text;
-            textBlock.Background = Brushes.White;
-            textBlock.Foreground = Brushes.Black;
-            textBlock.Padding = new Thickness(10);
-            textBlock.FontSize = 20;
-            textBlock.Width = 300;
-            textBlock.Height = 180;
-            textBlock.TextAlignment = TextAlignment.Center;
-            textBlock.VerticalAlignment = VerticalAlignment.Center;
-
-            Grid grid = new Grid();
-
-            grid.Children.Add(textBlock);
-
-            popup.Child = grid;
-
-        }
     }
 }

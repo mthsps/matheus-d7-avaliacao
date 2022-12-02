@@ -36,7 +36,7 @@
 			Usuário
 		</TextBlock>
 
-		<TextBox
+        <TextBox x:Name="txtUsername"
             Grid.Column="1"
             Grid.Row="1"
             Background="#D9D9D9"
@@ -53,7 +53,7 @@
 			Senha
 		</TextBlock>
 
-		<PasswordBox
+        <PasswordBox x:Name="txtPassword"
             Grid.Column="1"
             Grid.Row="2"
             Background="#D9D9D9"
@@ -71,7 +71,7 @@
             Height="60"
             Width="240"
             VerticalAlignment="Top"
-            Click="Button_Click"
+            Click="Button_Login"
             >
 			Acessar
 		</Button>
