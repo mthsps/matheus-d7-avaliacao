@@ -38,18 +38,18 @@ namespace LoginApp
                 return;
             }
 
-            var user = context.Users.
-                Where(b => b.Username == username && b.Password == password)
+            var user = context.Users
+                .Where(b => b.Username == username && b.Password == password)
                 .FirstOrDefault();
 
-
-
-            if (user == null)
+            if (user != null)
             {
+                Title = "D7 - Avaliação - Sucesso";
                 MessageBox.Show("Usuário autenticado");
                 return;
             }
 
+            Title = "D7 - Avaliação - Erro";
             MessageBox.Show("Credenciais inválidas");
         }
 
