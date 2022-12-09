@@ -24,7 +24,7 @@ namespace LoginApp
 
             services.AddDbContext<Context>(options =>
             {
-                options.UseSqlite("Data source = Users.db");
+                options.UseSqlServer("Server=;TrustServerCertificate=True");
             });
 
             services.AddSingleton<MainWindow>();
